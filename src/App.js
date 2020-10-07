@@ -19,7 +19,8 @@ const App = () => {
   // This state is the source of truth for the data inside the app. You won't be needing dummyData anymore.
   // To make the search bar work (which is stretch) we'd need another state to hold the search term.
 
-  const likePost = (postId => {
+  const likePost = postId => {
+    console.log("running likePost")
     /*
       This function serves the purpose of increasing the number of likes by one, of the post with a given id.
 
@@ -31,12 +32,20 @@ const App = () => {
         - if the `id` of the post matches `postId`, return a new post object with the desired values (use the spread operator).
         - otherwise just return the post object unchanged. (DONE UNCERTAIN 5:07)
      */
-    setPosts(posts.map(id => {
-      return postId === id 
-        ? {...posts, likes: posts[id-1].likes+1}
-        : {posts}
+
+    setPosts(posts.map(post => {
+      return postId === post.id 
+        ? {...post, likes: post.likes+1}
+        : post
     }))
-  });
+
+    // setPosts(...posts,
+    //   posts.map(id => {
+    //     return (postId === id ? (likes: posts.likes+1) : posts);
+    //   })
+    // )
+
+  };
 
   return (
     <div className='App'>
